@@ -112,10 +112,10 @@ Available slots across managers are collected by normalizing their start_date wi
 
 ### Follow-up improvements
 
-Instead of handling all the logic in application memory it can be done on database level using transactions and row-level locks. For example, using a SQL query with a SELECT ... FOR UPDATE can lock a manager’s availability record while you assign the booking. This prevents race conditions where multiple requests might choose the same manager simultaneously.
+Instead of handling all the logic in application memory it can be done on database level using transactions and row-level locks. For example, using a SQL query with a SELECT ... FOR UPDATE can lock a manager’s availability record while you assign the booking. This prevents race conditions where multiple requests might choose the same manager simultaneously. It is important during the booking process and established through the client database connection pool.
 \\
 
-For scalable booking system in mid or large organisations in addition to material view require priority queue or scoring algorithm to decide which manager is best suited for a new bookings considering their workload, past bookings and performance ratio.
+For scalable booking system in mid or large organisations in addition to material view require priority queue or scoring algorithm to decide which manager is best suited for a new bookings considering their workload, past bookings and performance ratio. For this priority in booking I added extra column current_load which is updated once booking is done.
 
 ### Database optimization
 
