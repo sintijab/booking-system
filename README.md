@@ -61,6 +61,21 @@ API serves on port 3000, and the endpoint for booking is /calendar/query.
 
 ### Endpoints
 
+#### /calendar/query
+Retrieves available appointment slots for a specified day by filtering out overlapping or booked slots and count managers that aligns the criteria. \
+Expected input:
+``` bash
+curl -X POST http://localhost:3000/calendar/query \
+     -H "Content-Type: application/json" \
+     -d '{
+           "date": "2024-05-04",
+           "products": ["SolarPanels"],
+           "language": "German",
+           "rating": "Bronze"
+         }'
+
+```
+
 #### /book
 Assign a booking based on desired criteria and desired start time, where transaction with row-level locking prevents concurrent double-booking. \
 Expected input:
@@ -78,19 +93,6 @@ Expected input:
          }'
 ```
 
-#### /calendar/query
-Retrieves available appointment slots for a specified day by filtering out overlapping or booked slots and count managers that aligns the criteria.
-``` bash
-curl -X POST http://localhost:3000/calendar/query \
-     -H "Content-Type: application/json" \
-     -d '{
-           "date": "2024-05-04",
-           "products": ["SolarPanels"],
-           "language": "German",
-           "rating": "Bronze"
-         }'
-
-```
 ### Testing
 Tests are running with Jest. Contract tests verify that the API returns the expected keys and structure.  Integration tests covers database interactions and business requirements. \
 
